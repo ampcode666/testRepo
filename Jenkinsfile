@@ -3,7 +3,21 @@ pipeline {
   stages {
     stage('First') {
       steps {
-        echo 'Test'
+        parallel(
+          "First": {
+            echo 'Test'
+            
+          },
+          "analyze": {
+            waitForQualityGate()
+            
+          }
+        )
+      }
+    }
+    stage('ha') {
+      steps {
+        echo 'haha'
       }
     }
   }
